@@ -1,4 +1,4 @@
-package com.bogdanm.springshop.shared.validation;
+package com.bogdanm.springshop.util.validation;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

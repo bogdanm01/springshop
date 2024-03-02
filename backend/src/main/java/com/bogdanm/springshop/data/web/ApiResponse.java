@@ -1,4 +1,4 @@
-package com.bogdanm.springshop.shared.web;
+package com.bogdanm.springshop.data.web;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
@@ -19,7 +19,6 @@ public class ApiResponse<T> {
 
     public static class ApiResponseBuilder<T> {
 
-        // called when calling ApiResponse.builder()
         public ApiResponseBuilder() {
             this.messages = new ArrayList<>();
         }

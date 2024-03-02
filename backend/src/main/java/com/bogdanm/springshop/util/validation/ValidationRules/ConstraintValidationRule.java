@@ -1,7 +1,7 @@
-package com.bogdanm.springshop.shared.validation.ValidationRules;
+package com.bogdanm.springshop.util.validation.ValidationRules;
 
-import com.bogdanm.springshop.shared.validation.ValidationResult;
-import com.bogdanm.springshop.shared.validation.ValidationRule;
+import com.bogdanm.springshop.util.validation.ValidationResult;
+import com.bogdanm.springshop.util.validation.ValidationRule;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;

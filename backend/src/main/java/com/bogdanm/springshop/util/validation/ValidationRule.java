@@ -1,4 +1,4 @@
-package com.bogdanm.springshop.shared.validation;
+package com.bogdanm.springshop.util.validation;
 
 @FunctionalInterface
 public interface ValidationRule<T> {
