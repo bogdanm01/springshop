@@ -26,7 +26,7 @@ public class Validator<T> {
         return validationRule.validate(objectToValidate, new ValidationResult());
     }
 
-    public static <T> ValidatorBuilder<T> build() {
+    public static <T> ValidatorBuilder<T> builder() {
         return new ValidatorBuilder<T>();
     }
 
@@ -40,6 +40,11 @@ public class Validator<T> {
 
         public ValidatorBuilder<T> addRule(ValidationRule<T> validationRule, Boolean skipOnExistingErrors) {
             validationRules.put(validationRule, skipOnExistingErrors);
+            return this;
+        }
+
+        public ValidatorBuilder<T> addRule(ValidationRule<T> validationRule) {
+            validationRules.put(validationRule, false);
             return this;
         }
 
