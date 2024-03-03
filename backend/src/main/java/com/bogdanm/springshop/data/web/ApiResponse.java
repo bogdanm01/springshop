@@ -1,9 +1,11 @@
 package com.bogdanm.springshop.data.web;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,11 @@ public class ApiResponse<T> {
     private List<String> messages;
     private T content;
 
+    @JsonIgnore
+    private HttpStatus httpStatus;
+
+    public static final String SUCCESS_MESSAGE = "Operation completed successfully";
+
     public static class ApiResponseBuilder<T> {
 
         public ApiResponseBuilder() {
@@ -28,26 +35,35 @@ public class ApiResponse<T> {
             return this;
         }
 
+        /**
+         * Api response with BAD_REQUEST http status, a message list and empty content.
+         * @param messages list of messages
+         * @return ApiResponseBuilder<T> instance
+         */
         public ApiResponseBuilder<T> badRequest(List<String> messages) {
             return this.success(false)
+                    .httpStatus(HttpStatus.BAD_REQUEST)
                     .messages(messages)
                     .content(null);
         }
 
-        public ApiResponseBuilder<T> badRequest(String message) {
-            return this.success(false)
-                    .addMessage(message)
-                    .content(null);
-        }
-
+        /**
+         * Api response featuring default success message, without content.
+         * @return ApiResponseBuilder<T> instance
+         */
         public ApiResponseBuilder<T> successfulOperation() {
             return this.success(true)
-                    .addMessage("Operation completed successfully");
+                    .addMessage(SUCCESS_MESSAGE);
         }
 
+        /**
+         * Api response featuring default success message, with content.
+         * @param content Api response content
+         * @return ApiResponseBuilder<T> instance
+         */
         public ApiResponseBuilder<T> successfulOperation(T content) {
             return this.success(true)
-                    .addMessage("Operation completed successfully")
+                    .addMessage(SUCCESS_MESSAGE)
                     .content(content);
         }
     }
