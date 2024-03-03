@@ -3,14 +3,18 @@ package com.bogdanm.springshop.api;
 import com.bogdanm.springshop.data.dto.Request.Order.OrderRequest;
 import com.bogdanm.springshop.data.dto.Response.OrderResponse;
 import com.bogdanm.springshop.data.web.ApiResponse;
-import lombok.RequiredArgsConstructor;
+import com.bogdanm.springshop.services.OrderService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/order")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class OrderController {
+
+    private final OrderService orderService;
 
     @GetMapping
     public ResponseEntity<ApiResponse<?>> getAllOrders() {
@@ -24,7 +28,8 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<ApiResponse<OrderResponse>> createOrder(@RequestBody OrderRequest orderRequest) {
-        return null;
+        var response = orderService.createOrder(orderRequest);
+        return ResponseEntity.status(response.getHttpStatus()).body(response);
     }
 
     @DeleteMapping("{id}")
